@@ -7,15 +7,13 @@ import lombok.*;
 @ToString(exclude = {"id"})
 public class Board {
     private int id;
-    private String title;
-    private String content;
-    private String writer;
+    private String boardName;
+    private String boardType;
 
     @Builder(builderMethodName = "builder")
-    public Board(String title, String content, String writer) {
-        this.title = title;
-        this.content = content;
-        this.writer = writer;
+    public Board(String boardName, String boardType) {
+        this.boardName = boardName;
+        this.boardType = boardType;
     }
 
 

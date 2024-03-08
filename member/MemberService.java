@@ -1,11 +1,11 @@
 package member;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
 
 public interface MemberService {
-    List<?> getUserList();
     String addUsers();
     Member findUser(String username);
     String login(Member member);
@@ -19,4 +19,11 @@ public interface MemberService {
     List<?> findUsersByJob(String job);
     Map<String, ?> findUsersByJobFromMap(String job);
     Map<String, ?> getUserMap();
+    String test();
+
+    String createMemberTable() throws SQLException;
+
+    String deleteMemberTable() throws SQLException;
+
+    String closeConnection() throws SQLException;
 }

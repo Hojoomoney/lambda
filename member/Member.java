@@ -9,24 +9,18 @@ public class Member {
     private Long id;
     private String username;
     private String password;
-    private String confirmPassword;
     private String name;
-    private String regNumber;
-    private String phoneNumber;
-    private String address;
+    private String phone;
     private String job;
-    private double height;
-    private double weight;
+    private String height;
+    private String weight;
 
     @Builder(builderMethodName = "builder")
-    public Member(String username, String password, String confirmPassword, String name, String regNumber, String phoneNumber, String address, String job, double height, double weight) {
+    public Member(String username, String password, String name, String phone, String job, String height, String weight) {
         this.username = username;
         this.password = password;
-        this.confirmPassword = confirmPassword;
         this.name = name;
-        this.regNumber = regNumber;
-        this.phoneNumber = phoneNumber;
-        this.address = address;
+        this.phone = phone;
         this.job = job;
         this.height = height;
         this.weight = weight;

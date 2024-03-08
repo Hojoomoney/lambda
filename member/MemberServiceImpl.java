@@ -5,6 +5,7 @@ import common.UtilService;
 import common.UtilServiceImpl;
 import enums.Messenger;
 
+import java.sql.SQLException;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -12,18 +13,38 @@ import java.util.stream.IntStream;
 public class MemberServiceImpl extends AbstractService<Member> implements MemberService {
     private static MemberServiceImpl instance = new MemberServiceImpl();
     Map<String, Member> members;
-
+    private MemberRepository memberRepository;
     public MemberServiceImpl() {
+        memberRepository = MemberRepository.getInstance();
         this.members = new HashMap<>();
     }
     public static MemberServiceImpl getInstance(){
         return instance;
     }
+    @Override
+    public String test(){
+        return memberRepository.test();
+    }
 
     @Override
-    public List<Member> getUserList() {
-        return new ArrayList<>(members.values());
+    public String createMemberTable() throws SQLException {
+        return memberRepository.createMemberTable();
     }
+
+    @Override
+    public String deleteMemberTable() throws SQLException {
+        return memberRepository.deleteMemberTable();
+    }
+
+    @Override
+    public String closeConnection() throws SQLException {
+        return memberRepository.closeConnection();
+    }
+
+//    @Override
+//    public List<?> getUserList() throws SQLException {
+//        return memberRepository.getUserList();
+//    }
 
     @Override
     public String addUsers() {
@@ -84,14 +105,15 @@ public class MemberServiceImpl extends AbstractService<Member> implements Member
     }
 
     @Override
-    public Messenger save(Member member) {
+    public Messenger save(Member member) throws SQLException {
         members.put(member.getUsername(), member);
+        memberRepository.save(member);
         return Messenger.SUCCESS;
     }
 
     @Override
-    public List<Member> findAll() {
-        return new ArrayList<>(members.values());
+    public List<Member> findAll() throws SQLException {
+        return memberRepository.findAll();
     }
 
     @Override

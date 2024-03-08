@@ -1,28 +1,32 @@
 import account.AccountView;
+import article.ArticleView;
 import board.BoardView;
 import crawler.CrawlerView;
 import member.MemberView;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, SQLException {
         Scanner sc = new Scanner(System.in);
 
         while (true){
-            System.out.println("=== 0-Exit " +
-                    "1-User " +
-                    "2-Board " +
-                    "3-Account " +
-                    "4-Crawler " +
+            System.out.println("=== x-Exit " +
+                    "m-Member " +
+                    "a-Article " +
+                    "b-Board " +
+                    "o-Account " +
+                    "c-Crawler " +
                     "===");
             switch (sc.next()){
-                case "0":  return;
-                case "1": MemberView.main(sc);break;
-                case "2": BoardView.main(); break;
-                case "3": AccountView.main(sc); break;
-                case "4": CrawlerView.main(sc); break;
+                case "x":  return;
+                case "m": MemberView.main(sc);break;
+                case "a": ArticleView.main(sc); break;
+                case "b": BoardView.main(); break;
+                case "o": AccountView.main(sc); break;
+                case "c": CrawlerView.main(sc); break;
             }
         }
     }

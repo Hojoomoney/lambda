@@ -2,6 +2,7 @@ package member;
 
 import enums.Messenger;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -11,17 +12,19 @@ public class MemberController {
         this.memberService = MemberServiceImpl.getInstance();
     }
 
-    public Messenger join(Scanner sc){
-        System.out.println("ID, 비번, 비번확인, 이름, 주민번호, 전화번호, 주소, 직업을 순서대로 입력하세요.");
+    public String test(){
+        return memberService.test();
+    }
+    public Messenger join(Scanner sc) throws SQLException {
+        System.out.println("ID, 비번, 이름, 전화번호, 직업, 키, 몸무게를 순서대로 입력하세요.");
         memberService.save(Member.builder()
                                         .username(sc.next())
                                         .password(sc.next())
-                                        .confirmPassword(sc.next())
                                         .name(sc.next())
-                                        .regNumber(sc.next())
-                                        .phoneNumber(sc.next())
-                                        .address(sc.next())
+                                        .phone(sc.next())
                                         .job(sc.next())
+                                        .height(sc.next())
+                                        .weight(sc.next())
                                         .build());
         return Messenger.SUCCESS;
     }
@@ -41,9 +44,9 @@ public class MemberController {
         System.out.println("검색할 아이디를 입력하세요");
         return memberService.findUser(scan.next());
     }
-    public List<?> getUserList(){
-        return memberService.getUserList();
-    }
+//    public List<?> getUserList() throws SQLException {
+//        return memberService.getUserList();
+//    }
     public String countUsers(){
         return memberService.count();
     }
@@ -71,5 +74,21 @@ public class MemberController {
 
     public List<?> findUsersByJob(Scanner sc) {
         return memberService.findUsersByJob(sc.next());
+    }
+
+    public String createMemberTable() throws SQLException {
+        return memberService.createMemberTable();
+    }
+
+    public String deleteMemberTable() throws SQLException {
+        return memberService.deleteMemberTable();
+    }
+
+    public List<Member> findAll() throws SQLException {
+        return memberService.findAll();
+    }
+
+    public String closeConnection() throws SQLException {
+        return memberService.closeConnection();
     }
 }
