@@ -1,4 +1,4 @@
-package common;
+package com.rod.api.common;
 
 import java.util.HashMap;
 import java.util.List;

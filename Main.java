@@ -1,8 +1,10 @@
-import account.AccountView;
-import article.ArticleView;
-import board.BoardView;
-import crawler.CrawlerView;
-import member.MemberView;
+package com.rod.api;
+
+import com.rod.api.account.AccountView;
+import com.rod.api.article.ArticleView;
+import com.rod.api.board.BoardView;
+import com.rod.api.crawler.CrawlerView;
+import com.rod.api.member.MemberView;
 
 import java.io.IOException;
 import java.sql.SQLException;

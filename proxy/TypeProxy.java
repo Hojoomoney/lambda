@@ -1,4 +1,4 @@
-package proxy;
+package com.rod.api.proxy;
 
 import java.util.function.Function;
 

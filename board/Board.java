@@ -1,4 +1,4 @@
-package board;
+package com.rod.api.board;
 
 import lombok.*;
 

@@ -1,9 +1,9 @@
-package member;
+package com.rod.api.member;
 
-import common.AbstractService;
-import common.UtilService;
-import common.UtilServiceImpl;
-import enums.Messenger;
+import com.rod.api.common.AbstractService;
+import com.rod.api.common.UtilService;
+import com.rod.api.common.UtilServiceImpl;
+import com.rod.api.enums.Messenger;
 
 import java.sql.SQLException;
 import java.util.*;

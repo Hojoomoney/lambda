@@ -1,6 +1,6 @@
-package member;
+package com.rod.api.member;
 
-import enums.Messenger;
+import com.rod.api.enums.Messenger;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -9,7 +9,9 @@ import java.util.List;
 public class MemberRepository {
 
     private static MemberRepository instance;
-    Connection conn;
+    private Connection conn;
+    private PreparedStatement pstmt;
+    private ResultSet rs;
 
     static {
         try {
@@ -23,6 +25,8 @@ public class MemberRepository {
                 "jdbc:mysql://localhost:3306/adadb",
                 "ada",
                 "ada");
+        pstmt = null;
+        rs = null;
     }
 
     public static MemberRepository getInstance(){
@@ -34,8 +38,8 @@ public class MemberRepository {
     public List<Member> findAll() throws SQLException {
         List<Member> members = new ArrayList<>();
         String sql = "select * from members";
-        PreparedStatement pstmt = conn.prepareStatement(sql);
-        ResultSet rs = pstmt.executeQuery();
+        pstmt = conn.prepareStatement(sql);
+        rs = pstmt.executeQuery();
         if (rs.next()){
             do{
                 members.add(Member.builder()
@@ -69,16 +73,13 @@ public class MemberRepository {
                 "    height VARCHAR(20),\n" +
                 "    weight VARCHAR(20)\n" +
                 ")";
-        PreparedStatement pstmt = conn.prepareStatement(sql);
-        int ex = pstmt.executeUpdate();
-        pstmt.close();
-        conn.close();
-        return (ex == 0) ? Messenger.SUCCESS : Messenger.FAIL ;
+        pstmt = conn.prepareStatement(sql);
+        return (pstmt.executeUpdate() == 0) ? Messenger.SUCCESS : Messenger.FAIL ;
     }
 
     public String deleteMemberTable() throws SQLException {
         String sql = "DROP TABLE Members";
-        PreparedStatement pstmt = conn.prepareStatement(sql);
+        pstmt = conn.prepareStatement(sql);
         pstmt.executeUpdate();
         pstmt.close();
         return "회원테이블 삭제 성공";
@@ -87,7 +88,7 @@ public class MemberRepository {
     public Messenger save(Member member) throws SQLException {
         String sql = "INSERT INTO Members (username, password, name, phone, job, height, weight)\n" +
                 "VALUES (?, ?, ?, ?, ?, ?, ?);";
-        PreparedStatement pstmt = conn.prepareStatement(sql);
+        pstmt = conn.prepareStatement(sql);
             pstmt.setString(1,member.getUsername());
             pstmt.setString(2,member.getPassword());
             pstmt.setString(3,member.getName());

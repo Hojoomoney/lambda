@@ -1,4 +1,4 @@
-package member;
+package com.rod.api.member;
 
 import lombok.*;
 

@@ -1,4 +1,4 @@
-package product;
+package com.rod.api.product;
 
 import lombok.*;
 

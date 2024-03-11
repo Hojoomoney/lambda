@@ -1,4 +1,4 @@
-package article;
+package com.rod.api.article;
 
 import java.sql.*;
 import java.util.ArrayList;

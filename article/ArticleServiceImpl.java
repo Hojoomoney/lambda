@@ -1,7 +1,7 @@
-package article;
+package com.rod.api.article;
 
-import common.AbstractService;
-import enums.Messenger;
+import com.rod.api.common.AbstractService;
+import com.rod.api.enums.Messenger;
 
 import java.sql.SQLException;
 import java.util.List;

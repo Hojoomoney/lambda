@@ -1,9 +1,9 @@
-package account;
+package com.rod.api.account;
 
 
-import common.AbstractService;
-import enums.Messenger;
-import member.Member;
+import com.rod.api.common.AbstractService;
+import com.rod.api.enums.Messenger;
+import com.rod.api.member.Member;
 
 import java.util.*;
 

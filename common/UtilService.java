@@ -1,4 +1,4 @@
-package common;
+package com.rod.api.common;
 
 public interface UtilService {
     int createRandomInteger(int start,int end);
