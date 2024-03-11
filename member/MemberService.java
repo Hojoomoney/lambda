@@ -1,5 +1,7 @@
 package member;
 
+import enums.Messenger;
+
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
@@ -21,7 +23,7 @@ public interface MemberService {
     Map<String, ?> getUserMap();
     String test();
 
-    String createMemberTable() throws SQLException;
+    Messenger createMemberTable() throws SQLException;
 
     String deleteMemberTable() throws SQLException;
 

@@ -27,7 +27,7 @@ public class MemberServiceImpl extends AbstractService<Member> implements Member
     }
 
     @Override
-    public String createMemberTable() throws SQLException {
+    public Messenger createMemberTable() throws SQLException {
         return memberRepository.createMemberTable();
     }
 

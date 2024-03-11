@@ -76,7 +76,7 @@ public class MemberController {
         return memberService.findUsersByJob(sc.next());
     }
 
-    public String createMemberTable() throws SQLException {
+    public Messenger createMemberTable() throws SQLException {
         return memberService.createMemberTable();
     }
 

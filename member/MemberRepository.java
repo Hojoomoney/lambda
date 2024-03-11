@@ -9,7 +9,7 @@ import java.util.List;
 public class MemberRepository {
 
     private static MemberRepository instance;
-    Connection connection;
+    Connection conn;
 
     static {
         try {
@@ -19,7 +19,7 @@ public class MemberRepository {
         }
     }
     private MemberRepository() throws SQLException {
-        connection = DriverManager.getConnection(
+        conn = DriverManager.getConnection(
                 "jdbc:mysql://localhost:3306/adadb",
                 "ada",
                 "ada");
@@ -34,7 +34,7 @@ public class MemberRepository {
     public List<Member> findAll() throws SQLException {
         List<Member> members = new ArrayList<>();
         String sql = "select * from members";
-        PreparedStatement pstmt = connection.prepareStatement(sql);
+        PreparedStatement pstmt = conn.prepareStatement(sql);
         ResultSet rs = pstmt.executeQuery();
         if (rs.next()){
             do{
@@ -58,7 +58,7 @@ public class MemberRepository {
         return members;
     }
 
-    public String createMemberTable() throws SQLException {
+    public Messenger createMemberTable() throws SQLException {
         String sql = "CREATE TABLE Members (\n" +
                 "    id INT AUTO_INCREMENT PRIMARY KEY,\n" +
                 "    username VARCHAR(20) NOT NULL,\n" +
@@ -69,15 +69,16 @@ public class MemberRepository {
                 "    height VARCHAR(20),\n" +
                 "    weight VARCHAR(20)\n" +
                 ")";
-        PreparedStatement pstmt = connection.prepareStatement(sql);
-        pstmt.executeUpdate();
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+        int ex = pstmt.executeUpdate();
         pstmt.close();
-        return "회원테이블 생성 성공";
+        conn.close();
+        return (ex == 0) ? Messenger.SUCCESS : Messenger.FAIL ;
     }
 
     public String deleteMemberTable() throws SQLException {
         String sql = "DROP TABLE Members";
-        PreparedStatement pstmt = connection.prepareStatement(sql);
+        PreparedStatement pstmt = conn.prepareStatement(sql);
         pstmt.executeUpdate();
         pstmt.close();
         return "회원테이블 삭제 성공";
@@ -86,7 +87,7 @@ public class MemberRepository {
     public Messenger save(Member member) throws SQLException {
         String sql = "INSERT INTO Members (username, password, name, phone, job, height, weight)\n" +
                 "VALUES (?, ?, ?, ?, ?, ?, ?);";
-        PreparedStatement pstmt = connection.prepareStatement(sql);
+        PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1,member.getUsername());
             pstmt.setString(2,member.getPassword());
             pstmt.setString(3,member.getName());
@@ -98,13 +99,14 @@ public class MemberRepository {
             pstmt.close();
             return Messenger.SUCCESS;
         } else {
+            pstmt.close();
             return Messenger.FAIL;
         }
     }
 
 
     public String closeConnection() throws SQLException {
-        connection.close();
+        conn.close();
         return "연결 해제";
     }
 }
