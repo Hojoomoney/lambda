@@ -57,8 +57,6 @@ public class MemberRepository {
             System.out.println("데이터가 없습니다.");
         }
 
-        rs.close();
-        pstmt.close();
         return members;
     }
 
@@ -81,7 +79,6 @@ public class MemberRepository {
         String sql = "DROP TABLE Members";
         pstmt = conn.prepareStatement(sql);
         pstmt.executeUpdate();
-        pstmt.close();
         return "회원테이블 삭제 성공";
     }
 
@@ -96,13 +93,7 @@ public class MemberRepository {
             pstmt.setString(5,member.getJob());
             pstmt.setString(6,member.getHeight());
             pstmt.setString(7,member.getWeight());
-        if(pstmt.executeUpdate() > 0) {
-            pstmt.close();
-            return Messenger.SUCCESS;
-        } else {
-            pstmt.close();
-            return Messenger.FAIL;
-        }
+        return (pstmt.executeUpdate() > 0) ? Messenger.SUCCESS : Messenger.FAIL;
     }
 
 
