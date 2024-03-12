@@ -40,7 +40,12 @@ public enum Navigation {
             throw new RuntimeException(e);
         }
         return true;
+    }),
+    ERROR("error", i-> {
+        System.out.println("ERROR 유효하지 않는 문자입니다.");
+        return true;
     });
+
 
     private final String name;
     private final Predicate<Scanner> predicate;
@@ -62,6 +67,6 @@ public enum Navigation {
         String msg = sc.next();
         return Stream.of(values())
                 .filter(i -> i.name.equals(msg))
-                .findAny().orElseThrow(()->new IllegalArgumentException("잘못된 입력입니다.")).predicate.test(sc);
+                .findAny().orElse(ERROR).predicate.test(sc);
     }
 }

@@ -71,6 +71,10 @@ public enum MemberRouter {
             throw new RuntimeException(e);
         }
         return true;
+    }),
+    ERROR("error", (a,b) -> {
+        System.out.println("ERROR 유효하지 않는 문자입니다.");
+        return true;
     });
     private final String name;
     private final BiPredicate<MemberController, Scanner> biPredicate;
@@ -96,7 +100,6 @@ public enum MemberRouter {
         String name = scan.next();
         return Stream.of(values())
                 .filter(i -> i.name.equals(name))
-                .findAny().orElseThrow(() -> new IllegalArgumentException("유효하지 않은 문자입니다."))
-                .biPredicate.test(ctrl,scan);
+                .findAny().orElse(ERROR).biPredicate.test(ctrl,scan);
     }
 }
