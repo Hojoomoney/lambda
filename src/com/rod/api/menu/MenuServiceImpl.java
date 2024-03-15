@@ -2,6 +2,7 @@ package com.rod.api.menu;
 
 import com.rod.api.enums.Messenger;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class MenuServiceImpl implements MenuService {
@@ -33,6 +34,13 @@ public class MenuServiceImpl implements MenuService {
     public List<?> getMenusByCategory(String category) {
         return menuRepository.getMenusByCategory(category);
     }
+
+    @Override
+    public List<?> getItemsByCategory(String category) throws SQLException {
+        return menuRepository.getItemsByCategory(category);
+    }
+
+
     /**
      * 공통 메뉴 명령어 정의
      * x means 'Exit'

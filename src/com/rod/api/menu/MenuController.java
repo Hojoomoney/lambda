@@ -28,4 +28,9 @@ public class MenuController {
     public List<?> getMenusByCategory(String category){
         return menuService.getMenusByCategory(category);
     }
+
+
+    public List<?> getItemsByCategory(String category) throws SQLException {
+        return menuService.getItemsByCategory(category);
+    }
 }

@@ -2,8 +2,10 @@ package com.rod.api.enums;
 
 import com.rod.api.member.Member;
 import com.rod.api.member.MemberController;
+import com.rod.api.menu.MenuController;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Scanner;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
@@ -13,7 +15,7 @@ public enum MemberRouter {
         System.out.println("MemberView 종료");
         return false;
     }),
-    JOIN("j", i -> {
+    JOIN("joi", i -> {
         try {
             System.out.println(MemberController.getInstance().join(i));
         } catch (SQLException e) {
@@ -21,23 +23,23 @@ public enum MemberRouter {
         }
         return true;
     }),
-    LOGIN("l", i ->{
+    LOGIN("log", i ->{
         System.out.println(MemberController.getInstance().login(i));
         return true;
     }),
-    ID("id", i ->{
+    ID("cat", i ->{
         System.out.println(MemberController.getInstance().findUser(i));
         return true;
     }),
-    PASSWORD("cp", i ->{
+    PASSWORD("ch-pw", i ->{
         System.out.println(MemberController.getInstance().changePassword(i));
         return true;
     }),
-    DELETE("d", i ->{
+    DELETE("rm", i ->{
         System.out.println(MemberController.getInstance().delete(i));
         return true;
     }),
-    LIST("ls", i ->{
+    LIST("ls-a", i ->{
         try {
             MemberController.getInstance().findAll().forEach(System.out::println);;
         } catch (SQLException e) {
@@ -45,19 +47,19 @@ public enum MemberRouter {
         }
         return true;
     }),
-    NAME("name", i ->{
+    NAME("ls-n", i ->{
         System.out.println(MemberController.getInstance().findUsersByName(i));
         return true;
     }),
-    JOB("job", i ->{
+    JOB("ls-job", i ->{
         System.out.println(MemberController.getInstance().findUsersByJob(i));
         return true;
     }),
-    COUNT("count", i ->{
+    COUNT("cnt", i ->{
         System.out.println(MemberController.getInstance().countUsers());
         return true;
     }),
-    TOUCH("touch", i -> {
+    TOUCH("mk", i -> {
         try {
             System.out.println(MemberController.getInstance().createMemberTable());
         } catch (SQLException e) {
@@ -85,19 +87,9 @@ public enum MemberRouter {
         this.predicate = Predicate;
     }
 
-    public static Boolean router(Scanner scan){
-        System.out.println("[메뉴] x-Exit\n" +
-                " j-회원가입\n" +
-                " l-로그인\n" +
-                " id-ID검색\n" +
-                " cp-비번변경\n" +
-                " d-탈퇴\n" +
-                " ls-회원목록\n" +
-                " name-이름검색\n" +
-                " job-직업검색\n" +
-                " count-회원수\n" +
-                " touch - 테이블생성\n" +
-                " rm - 테이블삭제\n");
+    public static Boolean router(Scanner scan) throws SQLException {
+        MenuController.getInstance().getItemsByCategory("user")
+            .forEach(i -> System.out.print(i + " "));
         String name = scan.next();
         return Stream.of(values())
                 .filter(i -> i.name.equals(name))

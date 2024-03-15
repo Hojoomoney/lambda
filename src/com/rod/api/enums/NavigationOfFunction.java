@@ -7,6 +7,7 @@ import com.rod.api.member.MemberView;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Scanner;
 import java.util.function.Function;
 import java.util.stream.Stream;
@@ -65,6 +66,7 @@ public enum NavigationOfFunction {
     }
 
     public static Integer select(Scanner scan) {
+
         System.out.println("=== x-Exit " +
                 "m-Member " +
                 "a-Article " +

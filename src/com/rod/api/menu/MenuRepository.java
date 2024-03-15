@@ -77,11 +77,41 @@ public class MenuRepository {
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, category);
             rs = pstmt.executeQuery();
-            while(rs.next())    menus.add(Menu.builder().item(rs.getString(1)).build());
+            while(rs.next())    menus.add(Menu.builder().item(rs.getString("item")).build());
         } catch (SQLException e){
             System.err.println("SQL Exception Occurred");
             return menus;
         }
         return menus;
+    }
+
+    public List<?> getItemsByCategory(String category) throws SQLException {
+        String sql = "select item from menus where category = ?";
+        List<String> items = new ArrayList<>();
+        pstmt = conn.prepareStatement(sql);
+        pstmt.setString(1,category);
+        rs = pstmt.executeQuery();
+        if(rs.next()){
+            do{
+                items.add(rs.getString("item"));
+            } while(rs.next());
+        } else {
+            return null;
+        }
+        return items;
+    }
+    public List<?> makeFootbar() throws SQLException {
+        List<String> ls = new ArrayList<>();
+        String sql = " ";
+        pstmt = conn.prepareStatement(sql);
+        rs = pstmt.executeQuery();
+        if(rs.next()){
+            do{
+                ls.add(rs.getString("item"));
+            } while(rs.next());
+        } else {
+            System.out.println("No data");
+        }
+       return ls;
     }
 }

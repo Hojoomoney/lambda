@@ -1,6 +1,7 @@
 package com.rod.api.account;
 
 
+import com.rod.api.article.ArticleController;
 import com.rod.api.enums.Messenger;
 
 import java.time.LocalDateTime;
@@ -8,6 +9,11 @@ import java.util.List;
 import java.util.Scanner;
 
 public class AccountController {
+    private static AccountController instance = new AccountController();
+
+    public static AccountController getInstance(){
+        return instance;
+    }
     AccountServiceImpl accountService;
 
     public AccountController() {

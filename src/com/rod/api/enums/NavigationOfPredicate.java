@@ -6,9 +6,12 @@ import com.rod.api.article.ArticleView;
 import com.rod.api.board.BoardView;
 import com.rod.api.crawler.CrawlerView;
 import com.rod.api.member.MemberView;
+import com.rod.api.menu.MenuController;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
@@ -19,7 +22,7 @@ public enum NavigationOfPredicate {
         System.out.println("EXIT");
         return false;
     }),
-    MEMBER("m", i -> {
+    MEMBER("usr", i -> {
         try {
             MemberView.main(i);
         } catch (SQLException e) {
@@ -27,7 +30,7 @@ public enum NavigationOfPredicate {
         }
         return true;
     }),
-    ARTICLE("a", i->{
+    ARTICLE("art", i->{
         try {
             ArticleView.main(i);
         } catch (SQLException e) {
@@ -35,15 +38,15 @@ public enum NavigationOfPredicate {
         }
         return true;
     }),
-    BOARD("b",i ->{
+    BOARD("bbs",i ->{
         BoardView.main();
         return true;
     }),
-    ACCOUNT("o",i -> {
+    ACCOUNT("acc",i -> {
         AccountView.main(i);
         return true;
     }),
-    CRAWLER("c",i -> {
+    CRAWLER("cwl",i -> {
         try {
             CrawlerView.main(i);
         } catch (IOException e) {
@@ -66,14 +69,9 @@ public enum NavigationOfPredicate {
     }
 
 
-    public static Boolean select(Scanner sc){
-        System.out.println("=== x-Exit " +
-                "m-Member " +
-                "a-Article " +
-                "b-Board " +
-                "o-Account " +
-                "c-Crawler " +
-                "===");
+    public static Boolean select(Scanner sc) throws SQLException {
+        List<?> items = MenuController.getInstance().getItemsByCategory("navigate");
+        items.forEach(i -> System.out.print(i + " "));
         String msg = sc.next();
         return Stream.of(values())
                 .filter(i -> i.name.equals(msg))

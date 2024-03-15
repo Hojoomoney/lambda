@@ -100,7 +100,11 @@ create table player(
     foreign key (team_id) references team(id)
 );
 drop table stadium;
-drop table schedule;]]></console>
+drop table schedule;
+
+desc menus;
+select * from menus where category = 'navigate';
+select item from menus where category = 'navigate';]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseEditorStateManager">
