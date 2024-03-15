@@ -120,6 +120,7 @@ drop table schedule;]]></console>
   </component>
   <component name="DBNavigator.Project.FileConnectionMappingManager">
     <mapping file-url="file://$PROJECT_DIR$/src/com/rod/api/sql/soccer-test.sql" connection-id="463b3dbd-44d2-4976-9a77-5dbc3523f5d9" session-id="MAIN" current-schema="adadb" />
+    <mapping file-url="file://$PROJECT_DIR$/src/com/rod/api/sql/menu.sql" connection-id="463b3dbd-44d2-4976-9a77-5dbc3523f5d9" session-id="MAIN" current-schema="adadb" />
   </component>
   <component name="DBNavigator.Project.MethodExecutionManager">
     <method-browser />
